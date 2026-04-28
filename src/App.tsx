@@ -32,16 +32,16 @@ export default function App() {
 
   const faqs = [
     {
-      q: "My dog has already bitten someone — is it too late?",
+      q: "My dog has already bitten someone - is it too late?",
       a: "Resource guarding that has escalated to biting is absolutely addressable. This course covers behaviour at all levels of intensity, and understanding why it happened is the first step to changing it."
     },
     {
       q: "Is resource guarding the same as aggression?",
-      a: "Not exactly. Resource guarding is a specific behaviour rooted in insecurity around valued items. It can look like aggression — growling, snapping — but the cause and the solution are different. This course explains the distinction clearly."
+      a: "Not exactly. Resource guarding is a specific behaviour rooted in insecurity around valued items. It can look like aggression - growling, snapping - but the cause and the solution are different. This course explains the distinction clearly."
     },
     {
       q: "I've tried trainers before and nothing worked. Why would this be different?",
-      a: "Most approaches to guarding use dominance or correction-based methods. This course is built on behavioural science — understanding why the dog guards, not just suppressing the symptom."
+      a: "Most approaches to guarding use dominance or correction-based methods. This course is built on behavioural science - understanding why the dog guards, not just suppressing the symptom."
     },
     {
       q: "My child is in the home. Is it safe for me to implement this?",
@@ -112,7 +112,7 @@ export default function App() {
         </AnimatePresence>
       </header>
 
-      {/* Section 01 — Hero */}
+      {/* Section 01 - Hero */}
       <section id={sections.hero} className="pt-40 pb-20 px-4 flex flex-col items-center text-center">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -124,7 +124,7 @@ export default function App() {
               Stop Walking on Eggshells Around Your Dog's Guarding Behaviour.
             </h1>
             <p className="text-xl md:text-2xl text-dark/70 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Learn a clear, humane, step-by-step method to understand and reduce resource guarding — and rebuild trust with your dog.
+              Learn a clear, humane, step-by-step method to understand and reduce resource guarding - and rebuild trust with your dog.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
@@ -143,7 +143,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 02 — Agitation */}
+      {/* Section 02 - Agitation */}
       <section id={sections.about} className="py-24 px-4 bg-white/50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Does this sound familiar?</h2>
@@ -152,7 +152,7 @@ export default function App() {
               "My dog growls near his food bowl",
               "She snapped when I reached for her toy",
               "I'm scared to walk past him when he has a bone",
-              "I've been told to show dominance — it made things worse",
+              "I've been told to show dominance - it made things worse",
               "I don't know if this is aggression or something else",
               "I feel like I'm walking on eggshells in my own home"
             ].map((text, i) => (
@@ -173,12 +173,12 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 03 — Reframe */}
+      {/* Section 03 - Reframe */}
       <section className="py-24 px-4 max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold mb-10 leading-tight">Why the advice you've been given is probably making it worse</h2>
         <div className="space-y-6 text-lg text-dark/80 leading-relaxed">
           <p>
-            Showing dominance is a concept rooted in outdated science. When you try to "alpha" your dog, you're not teaching them respect—you're teaching them that you are a threat to the things they value.
+            Showing dominance is a concept rooted in outdated science. When you try to "alpha" your dog, you're not teaching them respect - you're teaching them that you are a threat to the things they value.
           </p>
           <p>
             Taking things away forcefully only confirms your dog's greatest fear: that the resource they love isn't safe. This directly escalates the guarding behavior the next time, as their instinct to protect it kicks into high gear.
@@ -192,7 +192,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 04 — Meet Shirin */}
+      {/* Section 04 - Meet Shirin */}
       <section id={sections.instructor} className="py-24 px-4 bg-dark text-brand-bg">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center mb-20">
@@ -202,7 +202,7 @@ export default function App() {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Meet your instructor</h2>
               <p className="text-xl text-brand-bg/80 leading-relaxed max-w-2xl">
-                I've spent 30 years working with dogs that families had given up on — and the owners who refused to give up on them. Resource guarding is one of the most misunderstood behaviours I see. And one of the most fixable, when approached correctly.
+                I've spent 30 years working with dogs that families had given up on - and the owners who refused to give up on them. Resource guarding is one of the most misunderstood behaviours I see. And one of the most fixable, when approached correctly.
               </p>
             </div>
           </div>
@@ -224,7 +224,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 05 — Who this is for */}
+      {/* Section 05 - Who this is for */}
       <section className="py-24 px-4">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 relative">
           <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-dark/10" />
@@ -251,10 +251,10 @@ export default function App() {
             <h2 className="text-3xl font-bold">After this course, your life looks like this...</h2>
             <ul className="space-y-4">
               {[
-                "You know exactly what to do the moment guarding starts — instead of freezing",
+                "You know exactly what to do the moment guarding starts - instead of freezing",
                 "Mealtimes won't feel tense anymore",
                 "You'll stop managing around your dog and start actually living with them",
-                "You understand what your dog is communicating — and respond, not react",
+                "You understand what your dog is communicating - and respond, not react",
                 "Your home feels calmer. Your relationship feels different."
               ].map((text, i) => (
                 <li key={i} className="flex gap-4 items-start text-lg text-primary font-medium">
@@ -267,11 +267,11 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 06 — Solution Intro */}
+      {/* Section 06 - Solution Intro */}
       <section className="py-32 px-4 bg-primary text-white">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Introducing: Resource Guarding in Dogs</h2>
-          <p className="text-xl opacity-90 mb-16">A short, practical video course built for dog parents — not trainers.</p>
+          <p className="text-xl opacity-90 mb-16">A short, practical video course built for dog parents - not trainers.</p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -292,14 +292,14 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 07 — Curriculum */}
+      {/* Section 07 - Curriculum */}
       <section id={sections.curriculum} className="py-24 px-4 bg-brand-bg">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-20">What you'll learn</h2>
           <div className="space-y-12">
             {[
               { title: "Understand what resource guarding actually is and why your dog does it", desc: "The biological drive and psychological triggers behind the behavior." },
-              { title: "The mistakes to stop immediately — before they escalate the behaviour", desc: "Breaking the cycle of intimidation and insecurity today." },
+              { title: "The mistakes to stop immediately - before they escalate the behaviour", desc: "Breaking the cycle of intimidation and insecurity today." },
               { title: "A management plan that creates a safer home right now", desc: "Practical physical setups and communication cues to lower everyone's stress." },
               { title: "Trust-building exercises that reduce guarding over time", desc: "Step-by-step training to change your dog's emotional response to sharing." }
             ].map((step, i) => (
@@ -320,7 +320,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 08 — Format */}
+      {/* Section 08 - Format */}
       <section className="py-24 px-4 bg-white border-y border-dark/5">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-16">Simple. Practical. Yours for life.</h2>
@@ -345,19 +345,19 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 09 — Case Story */}
+      {/* Section 09 - Case Story */}
       <section className="py-24 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold mb-10 text-dark/40 text-center tracking-tight uppercase">
-            [Real transformation story — coming soon]
+            [Real transformation story - coming soon]
           </h2>
           <div className="bg-white border-l-8 border-secondary p-12 rounded-3xl shadow-xl shadow-secondary/5 italic text-xl text-dark/70 leading-relaxed">
-            "This section will feature a real dog and family Shirin has worked with — their before, their turning point, and their after. Placeholder until client provides case details."
+            "This section will feature a real dog and family Shirin has worked with - their before, their turning point, and their after. Placeholder until client provides case details."
           </div>
         </div>
       </section>
 
-      {/* Section 10 — Testimonials */}
+      {/* Section 10 - Testimonials */}
       <section className="py-24 px-4 bg-brand-bg">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">What dog parents say</h2>
@@ -371,7 +371,7 @@ export default function App() {
                 <Quote size={40} className="text-secondary/30" />
                 <p className="text-lg italic text-dark/80 leading-relaxed flex-grow">{text}</p>
                 <div className="pt-4 border-t border-dark/5 w-full">
-                  <p className="font-bold text-dark/50">— [Name], [City]</p>
+                  <p className="font-bold text-dark/50">- [Name], [City]</p>
                 </div>
               </div>
             ))}
@@ -380,7 +380,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 11 — Bonus */}
+      {/* Section 11 - Bonus */}
       <section className="py-24 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Enroll and receive this free</h2>
@@ -389,7 +389,7 @@ export default function App() {
               Free with enrollment
             </div>
             <BookOpen size={48} className="text-amber-500 mb-2" />
-            <h3 className="text-3xl font-extrabold text-dark">[Ebook title — coming soon]</h3>
+            <h3 className="text-3xl font-extrabold text-dark">[Ebook title - coming soon]</h3>
             <p className="text-xl text-dark/60 leading-relaxed max-w-2xl">
               A practical guide covering: warning signs people miss, what never to do, safety protocols for homes with children, and your first steps to reduce conflict today.
             </p>
@@ -397,7 +397,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 12 — Offer */}
+      {/* Section 12 - Offer */}
       <section id={sections.offer} className="py-32 px-4 bg-brand-bg">
         <div className="max-w-2xl mx-auto bg-white p-12 md:p-16 rounded-[40px] shadow-2xl border border-dark/5 text-center flex flex-col gap-10">
           <header>
@@ -425,7 +425,7 @@ export default function App() {
           </div>
 
           <div>
-            <div className="text-5xl font-black text-primary mb-2">[Price — TBD]</div>
+            <div className="text-5xl font-black text-primary mb-2">[Price - TBD]</div>
             <p className="text-dark/40 font-medium">One-time payment. Instant access.</p>
           </div>
 
@@ -455,7 +455,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 13 — FAQ */}
+      {/* Section 13 - FAQ */}
       <section id={sections.faq} className="py-24 px-4 bg-white">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Questions dog parents ask</h2>
@@ -492,7 +492,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 14 — Closing */}
+      {/* Section 14 - Closing */}
       <section className="py-32 px-4 bg-dark text-white text-center">
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-12">
           <Quote size={64} className="text-primary/30" />
@@ -500,7 +500,7 @@ export default function App() {
             "Your dog isn't guarding because they're dangerous. They're guarding because they haven't yet learned they don't need to. That's behaviour. And behaviour can change."
           </p>
           <div className="flex flex-col items-center gap-8">
-            <span className="text-xl font-medium text-primary">— Shirin Dhabhar, Canines Can Care</span>
+            <span className="text-xl font-medium text-primary">- Shirin Dhabhar, Canines Can Care</span>
             <a 
               href={`#${sections.offer}`}
               className="bg-primary text-white px-12 py-6 rounded-full text-2xl font-bold hover:scale-105 transition-transform"

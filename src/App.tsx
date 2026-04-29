@@ -197,8 +197,8 @@ export default function App() {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center mb-20">
             <img 
-              src="/input_file_0.png" 
-              alt="Shirin Dhabhar with a dog" 
+              src="input_file_0.png" 
+              alt="Shirin Dhabhar - Dog Behaviour Expert" 
               className="w-48 h-48 rounded-full object-cover border-4 border-primary/20 shadow-2xl shrink-0"
               referrerPolicy="no-referrer"
             />
@@ -348,17 +348,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 09 - Case Story */}
-      <section className="py-24 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-10 text-dark/40 text-center tracking-tight uppercase">
-            [Real transformation story - coming soon]
-          </h2>
-          <div className="bg-white border-l-8 border-secondary p-12 rounded-3xl shadow-xl shadow-secondary/5 italic text-xl text-dark/70 leading-relaxed">
-            "This section will feature a real dog and family Shirin has worked with - their before, their turning point, and their after. Placeholder until client provides case details."
-          </div>
-        </div>
-      </section>
 
       {/* Section 10 - Testimonials */}
       <section className="py-24 px-4 bg-brand-bg">
@@ -391,7 +380,6 @@ export default function App() {
               </div>
             ))}
           </div>
-          <p className="text-center text-dark/40 text-sm">Real testimonials to be confirmed by client</p>
         </div>
       </section>
 
@@ -404,7 +392,7 @@ export default function App() {
               Free with enrollment
             </div>
             <BookOpen size={48} className="text-amber-500 mb-2" />
-            <h3 className="text-3xl font-extrabold text-dark">[Ebook title - coming soon]</h3>
+            <h3 className="text-3xl font-extrabold text-dark">The Resource Guarding Recovery Guide</h3>
             <p className="text-xl text-dark/60 leading-relaxed max-w-2xl">
               A practical guide covering: warning signs people miss, what never to do, safety protocols for homes with children, and your first steps to reduce conflict today.
             </p>
@@ -440,7 +428,7 @@ export default function App() {
           </div>
 
           <div>
-            <div className="text-5xl font-black text-primary mb-2">[Price - TBD]</div>
+            <div className="text-5xl font-black text-primary mb-2">₹9,999</div>
             <p className="text-dark/40 font-medium">One-time payment. Instant access.</p>
           </div>
 

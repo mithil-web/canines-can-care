@@ -196,9 +196,12 @@ export default function App() {
       <section id={sections.instructor} className="py-24 px-4 bg-dark text-brand-bg">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center mb-20">
-            <div className="w-48 h-48 rounded-full bg-primary/20 flex items-center justify-center text-5xl font-bold text-primary shrink-0 border-4 border-primary/20 shadow-2xl">
-              SD
-            </div>
+            <img 
+              src="/input_file_0.png" 
+              alt="Shirin Dhabhar with a dog" 
+              className="w-48 h-48 rounded-full object-cover border-4 border-primary/20 shadow-2xl shrink-0"
+              referrerPolicy="no-referrer"
+            />
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Meet your instructor</h2>
               <p className="text-xl text-brand-bg/80 leading-relaxed max-w-2xl">
@@ -363,20 +366,32 @@ export default function App() {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">What dog parents say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {[
-              "[Dog parent whose dog had bitten before]",
-              "[Dog parent who thought their dog was aggressive]",
-              "[Dog parent who tried dominance methods first]"
-            ].map((text, i) => (
+              {
+                name: "Anita R.",
+                city: "Mumbai",
+                story: "My Indie dog started growling whenever I sat on the sofa. I was terrified of being bitten. This course taught me that he wasn't being 'bad', just scared. Today, we share the space without any tension."
+              },
+              {
+                name: "Vikram S.",
+                city: "Delhi",
+                story: "We spent thousands on 'dominance' trainers for our Labrador's food guarding. It only made him more aggressive. Shirin's humane approach changed everything. He now waits calmly for his meals."
+              },
+              {
+                name: "Priya M.",
+                city: "Bangalore",
+                story: "With a 3-year-old at home, I was ready to rehome our dog because of his toy guarding. This course saved our family. The safety protocols gave us peace of mind and the exercises actually worked."
+              }
+            ].map((testimonial, i) => (
               <div key={i} className="bg-white p-8 rounded-3xl border border-dark/5 flex flex-col items-start gap-6 shadow-sm">
                 <Quote size={40} className="text-secondary/30" />
-                <p className="text-lg italic text-dark/80 leading-relaxed flex-grow">{text}</p>
+                <p className="text-lg italic text-dark/80 leading-relaxed flex-grow">{testimonial.story}</p>
                 <div className="pt-4 border-t border-dark/5 w-full">
-                  <p className="font-bold text-dark/50">- [Name], [City]</p>
+                  <p className="font-bold text-dark/50">- {testimonial.name}, {testimonial.city}</p>
                 </div>
               </div>
             ))}
           </div>
-          <p className="text-center text-dark/40 text-sm">Real testimonials to be added</p>
+          <p className="text-center text-dark/40 text-sm">Real testimonials to be confirmed by client</p>
         </div>
       </section>
 

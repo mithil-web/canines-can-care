@@ -197,7 +197,7 @@ export default function App() {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center mb-20">
             <img 
-              src="input_file_0.png" 
+              src="/1.jpg" 
               alt="Shirin Dhabhar - Dog Behaviour Expert" 
               className="w-48 h-48 rounded-full object-cover border-4 border-primary/20 shadow-2xl shrink-0"
               referrerPolicy="no-referrer"

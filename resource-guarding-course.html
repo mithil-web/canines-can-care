@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Resource Guarding in Dogs - Canines Can Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════════════════
+   RESET & ROOT
+════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+:root{
+  --cream:#F5F0E8;
+  --cream2:#EDE8DF;
+  --cream3:#FAF7F2;
+  --white:#FFFFFF;
+  --dark:#0D1F1A;
+  --dark2:#1A3028;
+  --mid:#4A6358;
+  --muted:#7A8F87;
+  --border:#E2DDD5;
+  --green:#1A9E60;
+  --green2:#128A4F;
+  --green-bg:#EAF6EF;
+  --teal-hero:#0C2D22;
+  --orange:#E8622A;
+  --gold:#F5C53A;
+  --font:'Inter',system-ui,sans-serif;
+}
+body{
+  font-family:var(--font);
+  background:#fff;
+  color:var(--dark);
+  line-height:1.65;
+  overflow-x:hidden;
+  padding-top:68px;
+  padding-bottom:76px;
+}
+
+/* ════════════════════════════════════
+   SCROLL ANIMATIONS
+════════════════════════════════════ */
+.reveal{
+  opacity:0;
+  transform:translateY(32px);
+  transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{
+  opacity:0;transform:translateX(-40px);
+  transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1);
+}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{
+  opacity:0;transform:translateX(40px);
+  transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1);
+}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{
+  opacity:0;transform:scale(.94);
+  transition:opacity .65s ease,transform .65s ease;
+}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+/* stagger delays */
+.d1{transition-delay:.05s}.d2{transition-delay:.15s}.d3{transition-delay:.25s}
+.d4{transition-delay:.35s}.d5{transition-delay:.45s}
+
+/* ════════════════════════════════════
+   NAV
+════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:68px;padding:0 6%;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--teal-hero);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.nav-logo-icon svg{width:20px;height:20px}
+.nav-brand{font-size:.95rem;font-weight:800;color:var(--dark);line-height:1.15}
+.nav-brand small{display:block;font-weight:400;font-size:.72rem;color:var(--muted)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-link{color:var(--mid);font-size:.875rem;font-weight:500;text-decoration:none;padding:7px 14px;border-radius:6px;transition:color .2s,background .2s}
+.nav-link:hover{color:var(--dark);background:var(--cream)}
+.nav-enroll{
+  background:var(--green);color:#fff;
+  border:none;border-radius:8px;
+  padding:8px 20px;font-size:.875rem;font-weight:700;
+  cursor:pointer;text-decoration:none;font-family:var(--font);
+  transition:background .2s,transform .15s;
+}
+.nav-enroll:hover{background:var(--green2);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:2px;background:var(--dark);border-radius:2px;display:block;transition:.3s}
+.mobile-menu{
+  display:none;position:fixed;top:68px;left:0;right:0;
+  background:#fff;border-bottom:1px solid var(--border);
+  padding:16px 6%;flex-direction:column;gap:0;z-index:999;
+  box-shadow:0 12px 32px rgba(0,0,0,.1);
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--mid);text-decoration:none;font-size:.95rem;font-weight:500;padding:12px 0;border-bottom:1px solid var(--border)}
+.mobile-menu a:last-child{border-bottom:none;color:var(--green);font-weight:700}
+
+/* ════════════════════════════════════
+   STICKY BAR
+════════════════════════════════════ */
+.sticky-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:999;
+  background:var(--cream);border-top:1px solid var(--border);
+  padding:12px 6%;display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.sticky-info{font-size:.9rem;font-weight:700;color:var(--dark)}
+.sticky-info span{display:block;font-size:.75rem;font-weight:400;color:var(--muted);margin-top:1px}
+.sticky-btn{
+  background:var(--green);color:#fff;border:none;border-radius:8px;
+  padding:11px 28px;font-size:.9rem;font-weight:700;
+  cursor:pointer;text-decoration:none;font-family:var(--font);
+  transition:background .2s,transform .15s;white-space:nowrap;
+}
+.sticky-btn:hover{background:var(--green2);transform:translateY(-1px)}
+
+/* ════════════════════════════════════
+   SHARED UTILS
+════════════════════════════════════ */
+.section{padding:72px 6%}
+.inner{max-width:1100px;margin:0 auto}
+.eyebrow{
+  font-size:.72rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--green);margin-bottom:10px;
+}
+h2.section-title{
+  font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;
+  color:var(--dark);letter-spacing:-.03em;line-height:1.12;
+  margin-bottom:16px;
+}
+.body-text{font-size:1rem;color:var(--mid);line-height:1.75;max-width:640px}
+.green-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green);color:#fff;border:none;border-radius:10px;
+  padding:14px 32px;font-size:1rem;font-weight:700;
+  cursor:pointer;text-decoration:none;font-family:var(--font);
+  transition:background .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 4px 18px rgba(26,158,96,.3);
+}
+.green-btn:hover{background:var(--green2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,158,96,.4)}
+.green-btn svg{width:16px;height:16px}
+
+/* ════════════════════════════════════
+   S01 HERO
+════════════════════════════════════ */
+#hero{background:#fff;padding:32px 6% 0}
+.hero-card{
+  background:var(--teal-hero);
+  border-radius:24px;
+  padding:52px 56px;
+  display:grid;
+  grid-template-columns:1fr 400px;
+  gap:40px;align-items:center;
+  background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:26px 26px;
+  background-color:var(--teal-hero);
+  position:relative;overflow:hidden;
+}
+/* animated glow orb */
+.hero-orb{
+  position:absolute;top:-80px;right:-80px;
+  width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle,rgba(26,158,96,.18) 0%,transparent 70%);
+  animation:orbPulse 5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes orbPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:1}}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);
+  color:rgba(255,255,255,.8);font-size:.75rem;font-weight:600;letter-spacing:.05em;
+  padding:6px 14px;border-radius:50px;margin-bottom:20px;text-transform:uppercase;
+}
+.hero-h1{
+  font-size:clamp(2rem,4.2vw,3.2rem);font-weight:900;
+  color:#fff;line-height:1.1;letter-spacing:-.03em;
+  margin-bottom:18px;
+}
+.hero-h1 em{
+  font-style:normal;
+  background:linear-gradient(135deg,#4FFFB4,#1DB87A);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:28px;max-width:460px}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+  color:rgba(255,255,255,.85);font-size:.8rem;font-weight:500;
+  padding:7px 14px;border-radius:8px;
+}
+.hero-pill svg{width:13px;height:13px;opacity:.7}
+/* hero right - instructor visual */
+.hero-right-col{display:flex;flex-direction:column;gap:14px}
+.hero-instructor-card{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+}
+.hero-instructor-img{
+  width:100%;aspect-ratio:3/4;object-fit:cover;display:block;
+  background:linear-gradient(160deg,#1A4A35 0%,#0A2B1E 100%);
+  position:relative;
+}
+/* placeholder avatar for when no image supplied */
+.hero-instructor-img .placeholder-av{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(160deg,#1A4A35 0%,#0A2B1E 100%);
+}
+.placeholder-av .av-circle{
+  width:96px;height:96px;border-radius:50%;
+  background:rgba(255,255,255,.15);
+  border:2px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.2rem;font-weight:900;color:#fff;letter-spacing:-.02em;
+}
+.placeholder-av p{font-size:.8rem;color:rgba(255,255,255,.5);font-style:italic}
+.hero-instructor-caption{
+  padding:14px 16px;
+  background:rgba(0,0,0,.2);
+  display:flex;align-items:center;gap:10px;
+}
+.hero-instructor-caption strong{font-size:.85rem;font-weight:700;color:#fff;display:block}
+.hero-instructor-caption span{font-size:.72rem;color:rgba(255,255,255,.55)}
+/* mini stat pills below photo */
+.hero-stat-row{display:flex;gap:8px}
+.hero-stat-pill{
+  flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;padding:10px 12px;text-align:center;
+}
+.hero-stat-pill strong{font-size:1rem;font-weight:900;color:#fff;display:block;line-height:1}
+.hero-stat-pill small{font-size:.65rem;color:rgba(255,255,255,.5);margin-top:3px;display:block;line-height:1.3}
+
+/* proof cards below hero */
+.proof-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  margin-top:20px;
+}
+.proof-item{
+  background:var(--cream);
+  background-image:radial-gradient(circle,rgba(0,0,0,.05) 1px,transparent 1px);
+  background-size:18px 18px;background-color:var(--cream);
+  border:1px solid var(--border);border-radius:16px;
+  padding:24px 28px;
+  transition: transform .3s, box-shadow .3s;
+}
+.proof-item:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.08);
+}
+.proof-big{font-size:2.2rem;font-weight:900;color:var(--dark);letter-spacing:-.04em;margin-bottom:5px;line-height:1}
+.proof-sub{font-size:.83rem;color:var(--muted);line-height:1.5}
+.proof-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.proof-tag{
+  background:#fff;border:1px solid var(--border);border-radius:6px;
+  padding:4px 10px;font-size:.7rem;font-weight:600;color:var(--mid);
+}
+
+/* ════════════════════════════════════
+   S02 MARQUEE
+════════════════════════════════════ */
+#marquee{
+  background:var(--cream);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:44px 6%;
+}
+#marquee h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:24px}
+.mwrap{overflow:hidden}
+.mtrack{
+  display:flex;width:max-content;
+  gap:16px;
+  animation:mscroll 30s linear infinite;
+}
+.mtrack:hover{animation-play-state:paused}
+@keyframes mscroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.mpill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid var(--border);
+  border-radius:10px;padding:11px 20px;
+  font-size:.875rem;color:var(--mid);font-weight:500;
+  white-space:nowrap;
+  transition:border-color .2s, transform .2s, box-shadow .2s;
+}
+.mpill:hover{
+  border-color:var(--green);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(26,158,96,.1);
+}
+.mnote{font-style:italic;color:var(--muted);font-size:.875rem;text-align:center;margin-top:14px}
+
+/* ════════════════════════════════════
+   S03 REFRAME - open layout, no boxes
+════════════════════════════════════ */
+#reframe{background:#fff}
+.reframe-intro{margin-bottom:48px}
+.reframe-points{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.rpoint{
+  padding:32px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  transition:transform .3s, box-shadow .3s;
+}
+.rpoint:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 36px rgba(0,0,0,.06);
+}
+.rpoint-icon{font-size:1.8rem;margin-bottom:16px}
+.rpoint h3{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:8px;letter-spacing:-.01em}
+.rpoint p{font-size:.875rem;color:var(--mid);line-height:1.7}
+.reframe-pullquote{
+  margin-top:48px;padding-top:36px;border-top:1px solid var(--border);
+  font-size:clamp(1.1rem,2vw,1.4rem);font-style:italic;
+  color:var(--dark2);line-height:1.6;font-weight:500;
+  max-width:780px;
+}
+.reframe-pullquote::before{
+  content:'"';display:block;
+  font-size:4rem;line-height:.8;color:var(--green);
+  font-family:Georgia,serif;margin-bottom:10px;
+}
+.reframe-attrib{font-size:.82rem;color:var(--green);font-weight:700;margin-top:10px;font-style:normal}
+
+/* ════════════════════════════════════
+   S04 MEET SHIRIN - editorial two-col
+════════════════════════════════════ */
+#shirin{background:var(--cream3);border-top:1px solid var(--border)}
+.shirin-layout{
+  display:grid;grid-template-columns:360px 1fr;
+  gap:64px;align-items:start;
+}
+/* Photo + creds */
+.shirin-photo-wrap{position:relative}
+.shirin-img{
+  width:100%;border-radius:20px;
+  aspect-ratio:3/4;object-fit:cover;
+  display:block;
+  background:linear-gradient(145deg,#1A4A35 0%,#0A2B1E 100%);
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(12,45,34,.2);
+}
+.shirin-img .ph{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;
+}
+.ph-ring{
+  width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.8rem;font-weight:900;color:#fff;
+}
+.ph p{font-size:.8rem;color:rgba(255,255,255,.45);font-style:italic}
+/* floating badge on photo */
+.shirin-float-badge{
+  background:var(--teal-hero);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;padding:20px;
+  margin-top:20px;
+}
+.sfb-name{font-size:.95rem;font-weight:800;color:#fff;margin-bottom:2px}
+.sfb-role{font-size:.72rem;color:rgba(255,255,255,.55)}
+.sfb-creds{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.sfb-cred{
+  background:rgba(26,158,96,.2);border:1px solid rgba(26,158,96,.3);
+  color:#4FFFB4;font-size:.65rem;font-weight:600;
+  padding:3px 9px;border-radius:50px;
+}
+/* text side */
+.shirin-text .eyebrow{margin-bottom:6px}
+.shirin-text h2{margin-bottom:20px}
+.shirin-para{font-size:1rem;color:var(--mid);line-height:1.8;margin-bottom:18px}
+.shirin-para strong{color:var(--dark);font-weight:700}
+/* stats inline - no boxes */
+.shirin-stats{
+  display:flex;gap:0;
+  border-top:1px solid var(--border);
+  margin-top:28px;padding-top:28px;
+}
+.sstat{flex:1;padding-right:28px;border-right:1px solid var(--border)}
+.sstat:last-child{border-right:none;padding-right:0;padding-left:28px}
+.sstat:nth-child(2){padding:0 28px}
+.sstat-num{font-size:1.9rem;font-weight:900;color:var(--dark);letter-spacing:-.04em;line-height:1}
+.sstat-num sup{font-size:1rem;vertical-align:super}
+.sstat-num span{color:var(--green)}
+.sstat-desc{font-size:.78rem;color:var(--muted);margin-top:5px;line-height:1.4}
+
+/* ════════════════════════════════════
+   S05 WHO IS THIS FOR - open two-col
+════════════════════════════════════ */
+#who{background:#fff}
+.who-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;margin-top:36px;
+  border-top:1px solid var(--border);
+}
+.who-col{padding:36px 0}
+.who-col:first-child{padding-right:48px;border-right:1px solid var(--border)}
+.who-col:last-child{padding-left:48px}
+.who-col-head{
+  font-size:.82rem;font-weight:700;color:var(--dark);
+  letter-spacing:.02em;margin-bottom:20px;
+  padding-bottom:12px;border-bottom:1px solid var(--border);
+}
+.who-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+.who-list li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:.9rem;color:var(--mid);line-height:1.6;
+}
+.who-list li .icon-dot{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;margin-top:1px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:900;
+}
+.who-list.if-list li .icon-dot{background:rgba(232,98,42,.1);color:var(--orange)}
+.who-list.after-list li .icon-dot{background:var(--green-bg);color:var(--green)}
+
+/* ════════════════════════════════════
+   S06 COURSE INTRO - full dark card
+════════════════════════════════════ */
+#course-intro{background:var(--cream3);border-top:1px solid var(--border);padding:44px 6%}
+.intro-dark{
+  background:var(--teal-hero);border-radius:24px;
+  padding:52px 56px;
+  background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:26px 26px;background-color:var(--teal-hero);
+  position:relative;overflow:hidden;
+}
+.intro-dark .eyebrow{color:rgba(255,255,255,.5)}
+.intro-dark h2{color:#fff;margin-bottom:10px}
+.intro-dark .sub-text{font-size:.95rem;color:rgba(255,255,255,.6);margin-bottom:40px}
+/* 3-col open list inside dark card */
+.outcomes-open{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;border-top:1px solid rgba(255,255,255,.1);
+}
+.oc{padding:28px 32px 0 0;border-right:1px solid rgba(255,255,255,.08)}
+.oc:last-child{border-right:none;padding-right:0;padding-left:32px}
+.oc:nth-child(2){padding:28px 32px 0}
+.oc-emoji{font-size:1.6rem;margin-bottom:12px;display:block}
+.oc h4{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:7px}
+.oc p{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.65}
+
+/* ════════════════════════════════════
+   S07 CURRICULUM - timeline, open
+════════════════════════════════════ */
+#curriculum{background:#fff}
+.curr-list{
+  display:flex;flex-direction:column;gap:0;
+  max-width:760px;margin-top:36px;
+  border-left:2px solid var(--border);
+  padding-left:36px;
+}
+.curr-item{
+  position:relative;padding-bottom:36px;
+  transition:opacity .3s ease, transform .3s ease;
+}
+.curr-list:hover .curr-item{opacity:.4}
+.curr-list .curr-item:hover{opacity:1;transform:translateX(8px)}
+.curr-item:last-child{padding-bottom:0}
+/* connector dot */
+.curr-item::before{
+  content:'';position:absolute;
+  left:-43px;top:4px;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--green);
+  border:3px solid #fff;
+  box-shadow:0 0 0 2px var(--green);
+  transition:all .3s ease;
+}
+.curr-item:hover::before{
+  box-shadow:0 0 0 4px rgba(26,158,96,.2);
+  background:var(--green2);
+}
+.curr-num{font-size:.72rem;font-weight:700;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.curr-item h3{font-size:1.05rem;font-weight:800;color:var(--dark);margin-bottom:7px;letter-spacing:-.01em;transition:color .3s ease}
+.curr-item:hover h3{color:var(--green)}
+.curr-item p{font-size:.875rem;color:var(--mid);line-height:1.7}
+
+/* ════════════════════════════════════
+   S08 FORMAT - inline icons, no boxes
+════════════════════════════════════ */
+#format{background:var(--cream3);border-top:1px solid var(--border)}
+.format-list{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;margin-top:36px;
+  border-top:1px solid var(--border);
+}
+.format-item{padding:28px 28px 28px 0;border-right:1px solid var(--border)}
+.format-item:last-child{border-right:none;padding-right:0;padding-left:28px}
+.format-item:nth-child(2){padding:28px}
+.format-item:nth-child(3){padding:28px}
+.format-emoji{font-size:1.7rem;margin-bottom:12px;display:block}
+.format-item h4{font-size:.9rem;font-weight:700;color:var(--dark);margin-bottom:4px}
+.format-item p{font-size:.8rem;color:var(--muted)}
+.format-foot{font-size:.875rem;color:var(--muted);margin-top:28px;padding-top:20px;border-top:1px solid var(--border);font-style:italic}
+
+/* ════════════════════════════════════
+   S09 CASE STORY - editorial strip
+════════════════════════════════════ */
+#case{background:#fff;border-top:1px solid var(--border)}
+.case-inner{
+  padding:40px 0 40px;
+  border-left:4px solid var(--orange);
+  padding-left:32px;
+}
+.case-eyebrow{font-size:.72rem;font-weight:700;color:var(--orange);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.case-head{font-size:1.1rem;font-weight:700;color:var(--muted);margin-bottom:12px;letter-spacing:-.01em}
+.case-body{font-size:.95rem;color:var(--mid);font-style:italic;line-height:1.75;max-width:700px}
+
+/* ════════════════════════════════════
+   S10 TESTIMONIALS - photo cards
+════════════════════════════════════ */
+#testimonials{background:var(--cream3);border-top:1px solid var(--border)}
+.testi-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:24px;margin-top:36px;
+}
+.testi-card{
+  background:#fff;border-radius:16px;
+  border:1px solid var(--border);
+  overflow:hidden;
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+.testi-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.09)}
+/* photo slot */
+.testi-photo{
+  width:100%;aspect-ratio:1;
+  background:linear-gradient(145deg,#c8e6da 0%,#a8d5c2 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;font-weight:800;color:#fff;
+  position:relative;overflow:hidden;
+}
+.testi-photo img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .5s ease}
+.testi-card:hover .testi-photo img{transform:scale(1.05)}
+.testi-photo .tph-placeholder{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.tph-placeholder span{font-size:.72rem;color:rgba(255,255,255,.6);font-style:italic}
+.testi-body{padding:20px 20px 24px}
+.testi-quote-char{font-size:2.8rem;line-height:.8;color:var(--gold);font-family:Georgia,serif;font-weight:900;margin-bottom:8px}
+.testi-text{font-style:italic;font-size:.875rem;color:var(--mid);line-height:1.7;margin-bottom:14px}
+.testi-name{font-size:.8rem;font-weight:700;color:var(--dark);margin-bottom:2px}
+.testi-city{font-size:.72rem;color:var(--muted)}
+.testi-stars{color:#F5A623;font-size:.8rem;letter-spacing:2px;margin-top:8px}
+.testi-note{font-size:.7rem;color:var(--muted);margin-top:6px;font-style:italic}
+
+/* ════════════════════════════════════
+   S11 BONUS - accent strip
+════════════════════════════════════ */
+#bonus{background:#fff;border-top:1px solid var(--border)}
+.bonus-inner{
+  display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;gap:32px;
+  padding:36px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+.bonus-accent{
+  width:5px;height:100%;
+  background:linear-gradient(to bottom,var(--gold),#F5A623);
+  border-radius:4px;flex-shrink:0;
+  align-self:stretch;
+}
+.bonus-text h3{font-size:1.3rem;font-weight:800;color:var(--dark);margin-bottom:8px;letter-spacing:-.02em}
+.bonus-text p{font-size:.9rem;color:var(--mid);line-height:1.7;max-width:600px}
+.bonus-badge-pill{
+  background:var(--green);color:#fff;
+  font-size:.72rem;font-weight:700;
+  padding:6px 16px;border-radius:50px;
+  letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;
+  align-self:flex-start;
+}
+
+/* ════════════════════════════════════
+   S12 ENROLL
+════════════════════════════════════ */
+#enroll{
+  background:var(--teal-hero);
+  background-image:radial-gradient(circle,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:26px 26px;background-color:var(--teal-hero);
+}
+#enroll .inner{text-align:center}
+#enroll h2{color:#fff;margin-bottom:32px}
+.enroll-list{
+  display:inline-flex;flex-direction:column;
+  gap:12px;text-align:left;margin-bottom:36px;
+}
+.enroll-row{
+  display:flex;align-items:center;gap:12px;
+  font-size:.95rem;color:rgba(255,255,255,.8);
+}
+.echeck{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--green);display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;
+  font-size:.7rem;color:#fff;font-weight:700;
+}
+.enroll-price{
+  font-size:clamp(3rem,6vw,4.5rem);font-weight:900;
+  color:#fff;letter-spacing:-.05em;margin-bottom:28px;line-height:1;
+}
+.enroll-price sub{
+  font-size:1rem;font-weight:400;
+  color:rgba(255,255,255,.45);display:block;
+  letter-spacing:0;margin-top:6px;font-style:italic;
+}
+.enroll-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--green);color:#fff;border:none;border-radius:12px;
+  padding:16px 44px;font-size:1.05rem;font-weight:700;
+  cursor:pointer;text-decoration:none;font-family:var(--font);
+  transition:background .2s,transform .15s;
+  box-shadow:0 6px 28px rgba(26,158,96,.45);
+}
+.enroll-cta:hover{background:var(--green2);transform:translateY(-2px)}
+.enroll-urgency{
+  font-style:italic;color:rgba(255,255,255,.45);
+  font-size:.875rem;max-width:460px;margin:20px auto 28px;line-height:1.7;
+}
+.trust-row{
+  display:flex;gap:24px;justify-content:center;flex-wrap:wrap;
+  font-size:.78rem;color:rgba(255,255,255,.4);font-weight:500;
+}
+
+/* ════════════════════════════════════
+   S13 FAQ - GrowthSchool style
+════════════════════════════════════ */
+#faq{background:#fff;text-align:center}
+#faq h2{margin-bottom:32px}
+.faq-list{max-width:900px;margin:0 auto;text-align:left}
+.faq-item{
+  border:1px solid var(--border);border-radius:12px;
+  margin-bottom:10px;overflow:hidden;
+  transition:border-color .2s,box-shadow .2s;
+}
+.faq-item.open{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.faq-btn{
+  width:100%;background:none;border:none;
+  padding:20px 24px;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;
+  text-align:left;cursor:pointer;
+  font-size:.95rem;font-weight:600;color:var(--dark);
+  font-family:var(--font);
+}
+.faq-btn:hover{background:var(--cream3)}
+.faq-icon{
+  flex-shrink:0;width:26px;height:26px;border-radius:50%;
+  border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;color:var(--muted);
+  transition:transform .3s,background .2s,border-color .2s,color .2s;
+}
+.faq-item.open .faq-icon{
+  transform:rotate(45deg);
+  background:var(--dark);border-color:var(--dark);color:#fff;
+}
+.faq-answer{
+  max-height:0;overflow:hidden;
+  transition:max-height .35s ease,padding .3s;
+  padding:0 24px;
+  font-size:.875rem;color:var(--mid);line-height:1.78;
+}
+.faq-item.open .faq-answer{max-height:240px;padding:0 24px 22px}
+
+/* ════════════════════════════════════
+   S14 CLOSING
+════════════════════════════════════ */
+#closing{
+  background:var(--cream3);border-top:1px solid var(--border);
+  text-align:center;
+}
+.closing-copy{
+  font-size:clamp(1.4rem,3vw,2.2rem);font-weight:800;
+  color:var(--dark);letter-spacing:-.03em;line-height:1.4;
+  margin-bottom:20px;max-width:800px;margin-left:auto;margin-right:auto;
+}
+.closing-copy .gc{color:var(--green)}
+.closing-attrib{font-size:.9rem;font-weight:600;color:var(--green);margin-bottom:36px}
+
+/* ════════════════════════════════════
+   FOOTER
+════════════════════════════════════ */
+footer{background:var(--teal-hero);padding:52px 6% 32px}
+.ft-inner{max-width:1100px;margin:0 auto}
+.ft-top{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:28px;
+}
+.ft-left{}
+.ft-logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px}
+.ft-logo-icon{
+  width:40px;height:40px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+}
+.ft-logo-icon svg{width:18px;height:18px}
+.ft-logo-text{font-size:.95rem;font-weight:800;color:#fff;line-height:1.15}
+.ft-logo-text small{display:block;font-weight:300;font-size:.7rem;color:rgba(255,255,255,.4)}
+.ft-tagline{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.5;max-width:280px;margin-bottom:18px}
+.ft-socials{display:flex;gap:8px}
+.ft-social{
+  width:34px;height:34px;border-radius:8px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.55);font-size:.7rem;font-weight:700;
+  text-decoration:none;transition:background .2s,color .2s;
+}
+.ft-social:hover{background:rgba(255,255,255,.15);color:#fff}
+.ft-right h3{font-size:1rem;font-weight:700;color:#fff;margin-bottom:5px}
+.ft-right h3 span{color:var(--gold)}
+.ft-right p{font-size:.8rem;color:rgba(255,255,255,.45);margin-bottom:14px;line-height:1.5}
+.ft-sub-row{display:flex;gap:8px}
+.ft-input{
+  flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;padding:10px 14px;
+  font-size:.85rem;color:#fff;font-family:var(--font);outline:none;
+}
+.ft-input::placeholder{color:rgba(255,255,255,.3)}
+.ft-input:focus{border-color:var(--green)}
+.ft-sub-btn{
+  background:var(--green);color:#fff;border:none;border-radius:8px;
+  padding:10px 18px;font-size:.85rem;font-weight:700;
+  cursor:pointer;font-family:var(--font);transition:background .2s;
+  white-space:nowrap;
+}
+.ft-sub-btn:hover{background:var(--green2)}
+.ft-copy{text-align:center;font-size:.72rem;color:rgba(255,255,255,.25)}
+
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+@media(max-width:900px){
+  .hero-card{grid-template-columns:1fr;gap:24px}
+  .hero-right-col{display:none}
+  .proof-row{grid-template-columns:1fr 1fr}
+  .shirin-layout{grid-template-columns:1fr;gap:32px}
+  .reframe-points{grid-template-columns:1fr;gap:16px}
+  .rpoint{padding:24px}
+  .outcomes-open{grid-template-columns:1fr}
+  .oc{border-right:none;padding:24px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .oc:last-child{border-bottom:none;padding-left:0}
+  .oc:nth-child(2){padding:24px 0}
+  .format-list{grid-template-columns:1fr 1fr}
+  .format-item:nth-child(2){padding:28px 28px 28px 0}
+  .format-item:nth-child(3){padding:28px 28px 28px 0}
+  .testi-row{grid-template-columns:1fr 1fr}
+  .ft-top{grid-template-columns:1fr;gap:28px}
+  .who-layout{grid-template-columns:1fr}
+  .who-col:first-child{border-right:none;padding-right:0;border-bottom:1px solid var(--border);padding-bottom:28px}
+  .who-col:last-child{padding-left:0}
+  .bonus-inner{grid-template-columns:auto 1fr;gap:20px}
+  .bonus-badge-pill{display:none}
+  .shirin-stats{flex-direction:column;gap:0}
+  .sstat{border-right:none;padding:16px 0!important;border-bottom:1px solid var(--border)}
+  .sstat:last-child{border-bottom:none}
+  .intro-dark{padding:32px 28px}
+}
+@media(max-width:640px){
+  .hamburger{display:flex}
+  .nav-links{display:none}
+  .proof-row{grid-template-columns:1fr}
+  .testi-row{grid-template-columns:1fr}
+  .format-list{grid-template-columns:1fr}
+  .format-item{border-right:none!important;padding-left:0!important;border-bottom:1px solid var(--border)}
+  .format-item:last-child{border-bottom:none}
+  .hero-card{padding:28px 24px}
+  .hero-h1{font-size:1.75rem}
+  .section{padding:52px 5%}
+  .curr-list{padding-left:24px}
+  .curr-item::before{left:-31px}
+  .ft-sub-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="rgba(255,255,255,0.1)"/>
+        <path d="M8 12L11 15L16 9" stroke="#1DB87A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="nav-brand">Canines Can Care<small>Behavioural Training</small></div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="#curriculum">Curriculum</a>
+    <a class="nav-link" href="#shirin">Instructor</a>
+    <a class="nav-link" href="#testimonials">Reviews</a>
+    <a class="nav-link" href="#faq">FAQ</a>
+    <a class="nav-enroll" href="#enroll">Enroll Now</a>
+  </div>
+  <button class="hamburger" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mob">
+  <a href="#curriculum">Curriculum</a>
+  <a href="#shirin">Instructor</a>
+  <a href="#testimonials">Reviews</a>
+  <a href="#faq">FAQ</a>
+  <a href="#enroll">Enroll Now →</a>
+</div>
+
+<!-- ══ STICKY BAR ══ -->
+<div class="sticky-bar">
+  <div class="sticky-info">
+    ₹9,999
+    <span>Resource Guarding in Dogs · Canines Can Care</span>
+  </div>
+  <a class="sticky-btn" href="#enroll">Claim your spot</a>
+</div>
+
+<!-- ══════ S01 HERO ══════ -->
+<section id="hero" style="background:#fff;padding:28px 6% 64px">
+  <div class="inner">
+    <div class="hero-card reveal">
+      <div class="hero-orb"></div>
+      <!-- LEFT -->
+      <div class="hero-left">
+        <div class="hero-eyebrow">🐕 Canines Can Care · Behavioural Course</div>
+        <h1 class="hero-h1">
+          Stop Walking on Eggshells Around Your Dog's<br>
+          <em>Guarding Behaviour.</em>
+        </h1>
+        <p class="hero-sub">Learn a clear, humane, step-by-step method to understand and reduce resource guarding - and rebuild trust with your dog.</p>
+        <div class="hero-pills">
+          <div class="hero-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ~1 Hour Course
+          </div>
+          <div class="hero-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Force-Free Methods
+          </div>
+          <div class="hero-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Lifetime Access
+          </div>
+        </div>
+        <a class="green-btn" href="#enroll">
+          Claim your spot
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <!-- RIGHT - Shirin's photo slot -->
+      <div class="hero-right-col">
+        <div class="hero-instructor-card">
+          <div class="hero-instructor-img">
+            <!-- REPLACE src with Shirin's actual photo when provided -->
+            <img src="4.jpeg" alt="Shirin Dhabhar"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+              style="width:100%;height:100%;object-fit:cover;display:block"/>
+            <div class="placeholder-av" style="display:none;width:100%;height:100%;background:linear-gradient(160deg,#1A4A35,#0A2B1E);align-items:center;justify-content:center;flex-direction:column;gap:10px">
+              <div class="av-circle">SD</div>
+              <p style="font-size:.8rem;color:rgba(255,255,255,.45);font-style:italic">Shirin's photo here</p>
+            </div>
+          </div>
+          <div class="hero-instructor-caption">
+            <div class="instructor-avatar" style="width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;flex-shrink:0">SD</div>
+            <div>
+              <strong>Shirin Dhabhar</strong>
+              <span>KCAI Accredited · 30 Years Experience</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-stat-row">
+          <div class="hero-stat-pill"><strong><span class="counter" data-target="30">0</span>+</strong><small>years practice</small></div>
+          <div class="hero-stat-pill"><strong><span class="counter" data-target="1K">0</span>+</strong><small>students</small></div>
+          <div class="hero-stat-pill"><strong>#1</strong><small>in Asia</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- proof strip -->
+    <div class="proof-row">
+      <div class="proof-item reveal d1">
+        <div class="proof-big"><span class="counter" data-target="1,000">0</span>+</div>
+        <div class="proof-sub">Dog parents trained through Canines Can Care</div>
+        <div class="proof-tags">
+          <span class="proof-tag">KCAI Accredited</span>
+          <span class="proof-tag">Crufts 2015</span>
+          <span class="proof-tag">President's Award 2018</span>
+        </div>
+      </div>
+      <div class="proof-item reveal d2">
+        <div class="proof-big">One of 9</div>
+        <div class="proof-sub">Behaviourally trained KCAI practitioners in the world - the only one in Asia</div>
+        <div class="proof-tags">
+          <span class="proof-tag">30 Years</span>
+          <span class="proof-tag">Force-Free</span>
+          <span class="proof-tag">Internationally Recognised</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ S02 MARQUEE ══════ -->
+<section id="marquee">
+  <div class="inner">
+    <h2 class="reveal" style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:24px">Does this sound familiar?</h2>
+    <div class="mwrap reveal">
+      <div class="mtrack">
+        <div class="mpill">🍖 My dog growls near his food bowl</div>
+        <div class="mpill">🧸 She snapped when I reached for her toy</div>
+        <div class="mpill">😰 I'm scared to walk past him when he has a bone</div>
+        <div class="mpill">😤 Showing dominance made things worse</div>
+        <div class="mpill">❓ I don't know if this is aggression or something else</div>
+        <div class="mpill">🥚 I feel like I'm walking on eggshells at home</div>
+        <div class="mpill">🍖 My dog growls near his food bowl</div>
+        <div class="mpill">🧸 She snapped when I reached for her toy</div>
+        <div class="mpill">😰 I'm scared to walk past him when he has a bone</div>
+        <div class="mpill">😤 Showing dominance made things worse</div>
+        <div class="mpill">❓ I don't know if this is aggression or something else</div>
+        <div class="mpill">🥚 I feel like I'm walking on eggshells at home</div>
+      </div>
+    </div>
+    <p class="mnote reveal">If you nodded at even one of these, keep reading.</p>
+  </div>
+</section>
+
+<!-- ══════ S03 REFRAME ══════ -->
+<section id="reframe" class="section">
+  <div class="inner">
+    <div class="reframe-intro reveal">
+      <div class="eyebrow">Common Mistakes</div>
+      <h2 class="section-title">Why the advice you've been given<br>is probably making it worse</h2>
+    </div>
+    <div class="reframe-points">
+      <div class="rpoint reveal d1">
+        <div class="rpoint-icon">⚠️</div>
+        <h3>Showing Dominance Backfires</h3>
+        <p>Alpha thinking escalates the very behaviour you're trying to fix. It creates fear - and fear is the root of guarding, not the solution to it.</p>
+      </div>
+      <div class="rpoint reveal d2">
+        <div class="rpoint-icon">⚠️</div>
+        <h3>Taking Things Forcefully Escalates</h3>
+        <p>Grabbing items away teaches your dog that humans are a threat. It confirms exactly what their guarding is based on: that things will be taken.</p>
+      </div>
+      <div class="rpoint reveal d3">
+        <div class="rpoint-icon">⚠️</div>
+        <h3>Punishing the Growl Is Dangerous</h3>
+        <p>The growl is your dog's warning signal. Suppress it and you remove the only visible sign before a bite. A dog that no longer growls hasn't got better - it's got silenced.</p>
+      </div>
+    </div>
+    <div class="reframe-pullquote reveal">
+      Guarding isn't defiance. It's communication. And once you understand what your dog is actually telling you, everything changes.
+      <div class="reframe-attrib">- Shirin Dhabhar</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ S04 MEET SHIRIN ══════ -->
+<section id="shirin" class="section">
+  <div class="inner">
+    <div class="shirin-layout">
+      <!-- Photo col -->
+      <div class="shirin-photo-wrap reveal-left">
+        <div class="shirin-img">
+          <!-- REPLACE src with Shirin's actual photo when provided -->
+          <img src="5.jpeg" alt="Shirin Dhabhar"
+            style="width:100%;height:100%;object-fit:cover;display:block"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="ph" style="display:none">
+            <div class="ph-ring">SD</div>
+            <p>Shirin's photo here</p>
+          </div>
+        </div>
+        <div class="shirin-float-badge">
+          <div class="sfb-name">Shirin Dhabhar</div>
+          <div class="sfb-role">Founder, Canines Can Care</div>
+          <div class="sfb-creds">
+            <span class="sfb-cred">KCAI Accredited</span>
+            <span class="sfb-cred">One of 9 Worldwide</span>
+            <span class="sfb-cred">Crufts 2015</span>
+            <span class="sfb-cred">President's Award</span>
+          </div>
+        </div>
+      </div>
+      <!-- Text col -->
+      <div class="shirin-text reveal-right">
+        <div class="eyebrow">Meet your instructor</div>
+        <h2 class="section-title">30 years. One of nine.<br>The only one in Asia.</h2>
+        <p class="shirin-para">I've spent <strong>30 years</strong> working with dogs that families had given up on - and the owners who refused to give up on them. Resource guarding is one of the most misunderstood behaviours I see. And one of the most fixable, when approached correctly.</p>
+        <p class="shirin-para">My method isn't about control or correction. It's about understanding. When you understand <strong>why</strong> your dog is guarding, you stop reacting to the behaviour - and start responding to the dog. That's when things actually change.</p>
+        <p class="shirin-para">I am one of only <strong>9 people in the world</strong> to hold dual KCAI accreditation in both Companion and Behavioural Training - and the only person in Asia to hold this qualification.</p>
+        <div class="shirin-stats">
+          <div class="sstat">
+            <div class="sstat-num"><span class="counter" data-target="30">0</span><span>+</span></div>
+            <div class="sstat-desc">Years of practice</div>
+          </div>
+          <div class="sstat">
+            <div class="sstat-num"><span class="counter" data-target="1K">0</span><span>+</span></div>
+            <div class="sstat-desc">Dog parents trained</div>
+          </div>
+          <div class="sstat">
+            <div class="sstat-num" style="font-size:1.4rem;line-height:1.15">Only<br>in Asia</div>
+            <div class="sstat-desc">KCAI dual-accredited</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ S05 WHO IS THIS FOR ══════ -->
+<section id="who" class="section">
+  <div class="inner">
+    <div class="reveal">
+      <div class="eyebrow">Who Is This Course For?</div>
+      <h2 class="section-title">Built for dog parents,<br>not professional trainers.</h2>
+      <p class="body-text">Whether your dog growls at meal time or has already snapped - if you want to understand what's happening and what to do, this is for you.</p>
+    </div>
+    <div class="who-layout">
+      <div class="who-col reveal-left">
+        <div class="who-col-head">✅ This course is for you if…</div>
+        <ul class="who-list if-list">
+          <li><div class="icon-dot">●</div> Your dog guards food, toys, spaces or people</li>
+          <li><div class="icon-dot">●</div> You have children in the home and you're worried</li>
+          <li><div class="icon-dot">●</div> You've tried other methods and things have gotten worse</li>
+          <li><div class="icon-dot">●</div> You've been told your dog is dominant and it didn't feel right</li>
+          <li><div class="icon-dot">●</div> You're scared of your own dog in certain situations</li>
+        </ul>
+      </div>
+      <div class="who-col reveal-right">
+        <div class="who-col-head">🌿 After this course, your life looks like…</div>
+        <ul class="who-list after-list">
+          <li><div class="icon-dot">●</div> You know exactly what to do the moment guarding starts - instead of freezing</li>
+          <li><div class="icon-dot">●</div> Mealtimes won't feel tense anymore</li>
+          <li><div class="icon-dot">●</div> You'll stop managing around your dog and start actually living with them</li>
+          <li><div class="icon-dot">●</div> You understand what your dog is communicating - and respond, not react</li>
+          <li><div class="icon-dot">●</div> Your home feels calmer. Your relationship feels different.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ S06 COURSE INTRO ══════ -->
+<section id="course-intro">
+  <div class="inner" style="max-width:1100px;margin:0 auto;padding:0 0 44px">
+    <div class="intro-dark reveal-scale">
+      <div class="eyebrow">The Course</div>
+      <h2 class="section-title" style="color:#fff;font-size:clamp(1.7rem,3.5vw,2.4rem)">Introducing: Resource Guarding in Dogs</h2>
+      <p class="sub-text">A short, practical video course built for dog parents - not trainers.</p>
+      <div class="outcomes-open">
+        <div class="oc reveal d1">
+          <span class="oc-emoji">🧠</span>
+          <h4>Know your dog</h4>
+          <p>Understand exactly what triggers the guarding behaviour and what your dog is actually trying to tell you.</p>
+        </div>
+        <div class="oc reveal d2">
+          <span class="oc-emoji">🏠</span>
+          <h4>Safe home, now</h4>
+          <p>A management plan you can implement from day one - before any training even begins.</p>
+        </div>
+        <div class="oc reveal d3">
+          <span class="oc-emoji">🤝</span>
+          <h4>Long-term trust</h4>
+          <p>Exercises that reduce guarding and rebuild your relationship on a foundation of safety, not control.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ S07 CURRICULUM ══════ -->
+<section id="curriculum" class="section">
+  <div class="inner">
+    <div class="reveal">
+      <div class="eyebrow">Curriculum</div>
+      <h2 class="section-title">What you'll learn</h2>
+      <p class="body-text">Four focused modules. Practical tools you can use the same day.</p>
+    </div>
+    <div class="curr-list">
+      <div class="curr-item reveal d1">
+        <div class="curr-num">Module 01</div>
+        <h3>Understand What Resource Guarding Actually Is</h3>
+        <p>Why your dog guards - and why it's not dominance or defiance. The science behind the behaviour, explained simply.</p>
+      </div>
+      <div class="curr-item reveal d2">
+        <div class="curr-num">Module 02</div>
+        <h3>The Mistakes to Stop Immediately</h3>
+        <p>Common responses that escalate the behaviour - and what to do instead. This module alone changes everything.</p>
+      </div>
+      <div class="curr-item reveal d3">
+        <div class="curr-num">Module 03</div>
+        <h3>A Management Plan for Right Now</h3>
+        <p>Create a safer home environment starting from day one. Practical steps you can implement before the next mealtime.</p>
+      </div>
+      <div class="curr-item reveal d4">
+        <div class="curr-num">Module 04</div>
+        <h3>Trust-Building Exercises</h3>
+        <p>Long-term techniques that reduce guarding and strengthen your bond. Sustainable change that actually sticks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ S08 FORMAT ══════ -->
+<section id="format" class="section">
+  <div class="inner">
+    <div class="reveal">
+      <div class="eyebrow">Format</div>
+      <h2 class="section-title">Simple. Practical. Yours for life.</h2>
+    </div>
+    <div class="format-list">
+      <div class="format-item reveal d1">
+        <span class="format-emoji">🎬</span>
+        <h4>~1 Hour of Video</h4>
+        <p>Focused, no-fluff content</p>
+      </div>
+      <div class="format-item reveal d2">
+        <span class="format-emoji">♾️</span>
+        <h4>Lifetime Access</h4>
+        <p>Watch and rewatch anytime</p>
+      </div>
+      <div class="format-item reveal d3">
+        <span class="format-emoji">⏱️</span>
+        <h4>Your Own Pace</h4>
+        <p>No schedule, no pressure</p>
+      </div>
+      <div class="format-item reveal d4">
+        <span class="format-emoji">🚫</span>
+        <h4>Force-Free Only</h4>
+        <p>Science-backed, humane methods</p>
+      </div>
+    </div>
+    <p class="format-foot reveal">No prior training experience needed. This was built for dog parents, not professionals.</p>
+  </div>
+</section>
+
+<!-- ══════ S09 CASE STORY (Removed) ══════ -->
+
+<!-- ══════ S10 TESTIMONIALS ══════ -->
+<section id="testimonials" class="section">
+  <div class="inner">
+    <div class="reveal">
+      <div class="eyebrow">Globally Acclaimed</div>
+      <h2 class="section-title">What dog parents say</h2>
+    </div>
+    <div class="testi-row">
+      <!-- TESTIMONIAL 1 - replace img src when photos provided -->
+      <div class="testi-card reveal d1">
+        <div class="testi-photo">
+          <img src="1.jpeg" alt="Dog parent testimonial"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="tph-placeholder" style="display:none">
+            <span style="font-size:2.5rem">🐕</span>
+            <span>Photo coming soon</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <div class="testi-quote-char">"</div>
+          <p class="testi-text">"Before this course, I was terrified to walk past Max while he was eating. He had already snapped at my husband. Shirin's method helped us understand his fear. Within two weeks, the growling stopped entirely."</p>
+          <div class="testi-name">- Rohan Desai</div>
+          <div class="testi-city">Bengaluru, IN</div>
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-note">Verified Student</div>
+        </div>
+      </div>
+      <!-- TESTIMONIAL 2 -->
+      <div class="testi-card reveal d2">
+        <div class="testi-photo">
+          <img src="2.jpeg" alt="Dog parent testimonial"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="tph-placeholder" style="display:none">
+            <span style="font-size:2.5rem">🐾</span>
+            <span>Photo coming soon</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <div class="testi-quote-char">"</div>
+          <p class="testi-text">"I thought my dog was just being aggressive and dominant. Taking things away forcefully only made it worse. Learning to read his warning signs and responding without force completely changed our relationship."</p>
+          <div class="testi-name">- Aditi M.</div>
+          <div class="testi-city">New Delhi, IN</div>
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-note">Verified Student</div>
+        </div>
+      </div>
+      <!-- TESTIMONIAL 3 -->
+      <div class="testi-card reveal d3">
+        <div class="testi-photo">
+          <img src="3.jpeg" alt="Dog parent testimonial"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="tph-placeholder" style="display:none">
+            <span style="font-size:2.5rem">🦴</span>
+            <span>Photo coming soon</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <div class="testi-quote-char">"</div>
+          <p class="testi-text">"I hired three different trainers who told me to show her who's boss. It was a disaster. This course finally gave me a science-backed, humane approach. It's like a huge weight has been lifted off our home."</p>
+          <div class="testi-name">- Priya Sharma</div>
+          <div class="testi-city">Mumbai, IN</div>
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-note">Verified Student</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ S11 BONUS ══════ -->
+<section id="bonus" class="section">
+  <div class="inner">
+    <div class="reveal">
+      <div class="eyebrow">Free Bonus</div>
+      <h2 class="section-title">Enroll and receive this free</h2>
+    </div>
+    <div class="bonus-inner reveal">
+      <div class="bonus-accent"></div>
+      <div class="bonus-text">
+        <h3>The Dog Parent's Guide to Resource Guarding</h3>
+        <p>A practical guide covering: warning signs people miss, what never to do, safety protocols for homes with children, and your first steps to reduce conflict today.</p>
+      </div>
+      <div class="bonus-badge-pill">Free with enrollment</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ S12 ENROLL ══════ -->
+<section id="enroll" class="section">
+  <div class="inner">
+    <h2 class="section-title reveal" style="color:#fff">Everything included</h2>
+    <div class="enroll-list reveal">
+      <div class="enroll-row"><div class="echeck">✓</div> Course videos (lifetime access)</div>
+      <div class="enroll-row"><div class="echeck">✓</div> Resource guarding ebook (free)</div>
+      <div class="enroll-row"><div class="echeck">✓</div> Behaviour checklist</div>
+      <div class="enroll-row"><div class="echeck">✓</div> Force-free method guide</div>
+    </div>
+    <div class="enroll-price reveal">
+      ₹9,999
+      <sub>One-time payment · Lifetime access</sub>
+    </div>
+    <a class="enroll-cta reveal" href="#enroll">
+      Enroll Now - Get Instant Access
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <p class="enroll-urgency reveal">"Every day without a plan, the guarding becomes more practiced. The earlier you start, the easier it is to change."</p>
+    <div class="trust-row reveal">
+      <span>🔒 Secure payment</span>
+      <span>⚡ Instant access</span>
+      <span>♾️ Lifetime access</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ S13 FAQ ══════ -->
+<section id="faq" class="section">
+  <div class="inner">
+    <h2 class="section-title reveal">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item open reveal d1">
+        <button class="faq-btn">My dog has already bitten someone - is it too late?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Resource guarding that has escalated to biting is absolutely addressable. This course covers behaviour at all levels of intensity, and understanding why it happened is the first step to changing it.</div>
+      </div>
+      <div class="faq-item reveal d2">
+        <button class="faq-btn">Is resource guarding the same as aggression?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Not exactly. Resource guarding is a specific behaviour rooted in insecurity around valued items. It can look like aggression - growling, snapping - but the cause and the solution are different. This course explains the distinction clearly.</div>
+      </div>
+      <div class="faq-item reveal d3">
+        <button class="faq-btn">I've tried trainers before and nothing worked. Why would this be different?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Most approaches to guarding use dominance or correction-based methods. This course is built on behavioural science - understanding why the dog guards, not just suppressing the symptom.</div>
+      </div>
+      <div class="faq-item reveal d4">
+        <button class="faq-btn">My child is in the home. Is it safe to implement this?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Yes. The course includes specific guidance for households with children, including safety protocols and management strategies designed for that environment.</div>
+      </div>
+      <div class="faq-item reveal d5">
+        <button class="faq-btn">Is this for mild cases only or does it work for severe guarding too?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Both. Whether your dog is giving warning growls or has escalated further, the framework applies. Severe cases may need additional one-on-one support alongside the course.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ S14 CLOSING ══════ -->
+<section id="closing" class="section">
+  <div class="inner" style="text-align:center">
+    <div class="closing-copy reveal">
+      Your dog isn't guarding because they're dangerous.<br>
+      They're guarding because they haven't yet learned they don't need to.<br>
+      <span class="gc">That's behaviour. And behaviour can change.</span>
+    </div>
+    <p class="closing-attrib reveal">- Shirin Dhabhar, Canines Can Care</p>
+    <a class="green-btn reveal" href="#enroll" style="font-size:1.05rem;padding:15px 40px">
+      Start the Course Today
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-left">
+        <a class="ft-logo" href="#">
+          <div class="ft-logo-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="rgba(255,255,255,0.1)"/>
+              <path d="M8 12L11 15L16 9" stroke="#1DB87A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="ft-logo-text">Canines Can Care<small>Canine Behaviour and Training</small></div>
+        </a>
+        <p class="ft-tagline">Helping dog parents understand guarding behaviour and rebuild trust - one dog at a time.</p>
+        <div class="ft-socials">
+          <a class="ft-social" href="#">f</a>
+          <a class="ft-social" href="#">in</a>
+          <a class="ft-social" href="#">ig</a>
+        </div>
+      </div>
+      <div class="ft-right">
+        <h3>Best Kept Secrets <span>✨</span></h3>
+        <p>Be the first to hear about new courses, resources, and behavioural insights from Shirin Dhabhar.</p>
+        <div class="ft-sub-row">
+          <input class="ft-input" type="email" placeholder="Enter your email"/>
+          <button class="ft-sub-btn">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <p class="ft-copy">© 2025 Canines Can Care · Shirin Dhabhar. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ── Hamburger ── */
+document.getElementById('ham').addEventListener('click',()=>
+  document.getElementById('mob').classList.toggle('open'));
+document.querySelectorAll('#mob a').forEach(a=>
+  a.addEventListener('click',()=>document.getElementById('mob').classList.remove('open')));
+
+/* ── FAQ ── */
+document.querySelectorAll('.faq-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.faq-item');
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!open) item.classList.add('open');
+  });
+});
+
+/* ── Counters ── */
+const animateValue = (obj, start, end, duration, formatStr) => {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    const current = Math.floor(easeProgress * (end - start) + start);
+    let formatted = current;
+    if (formatStr === '1K') formatted = current >= 1000 ? '1K' : current;
+    else if (formatStr === '1,000') formatted = current.toLocaleString();
+    obj.innerHTML = formatted;
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+};
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const targetStr = e.target.dataset.target;
+      let targetNum = parseInt(targetStr.replace(/,/g, ''));
+      let format = '';
+      if (targetStr.includes('K')) { targetNum = 1000; format = '1K'; }
+      else if (targetStr.includes(',')) { format = '1,000'; }
+      animateValue(e.target, 0, targetNum, 2000, format);
+      counterObs.unobserve(e.target);
+    }
+  });
+},{threshold: 0.5});
+document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+
+/* ── Scroll Reveal ── */
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

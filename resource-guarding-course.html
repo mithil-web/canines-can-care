@@ -83,7 +83,7 @@ nav{
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-logo-icon{
   width:40px;height:40px;border-radius:50%;
-  background:var(--teal-hero);
+  background:var(--green);
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;
 }
@@ -132,6 +132,17 @@ nav{
 .sticky-btn:hover{background:var(--green2);transform:translateY(-1px)}
 
 /* ════════════════════════════════════
+   GLOBAL TYPOGRAPHY & ALIGNMENT
+════════════════════════════════════ */
+h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 24px; color: var(--dark); text-align: left; }
+h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 24px; color: var(--dark); text-align: left; }
+h3 { font-size: 1.2rem; font-weight: 800; line-height: 1.3; margin-bottom: 12px; color: var(--dark); text-align: left; }
+h4 { font-size: 1rem; font-weight: 700; line-height: 1.4; margin-bottom: 8px; color: var(--dark); text-align: left; }
+.section-title { margin-bottom: 24px; }
+.eyebrow { text-align: left; }
+.body-text { text-align: left; }
+
+/* ════════════════════════════════════
    SHARED UTILS
 ════════════════════════════════════ */
 .section{padding:72px 6%}
@@ -140,11 +151,7 @@ nav{
   font-size:.72rem;font-weight:700;letter-spacing:.12em;
   text-transform:uppercase;color:var(--green);margin-bottom:10px;
 }
-h2.section-title{
-  font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;
-  color:var(--dark);letter-spacing:-.03em;line-height:1.12;
-  margin-bottom:16px;
-}
+h2.section-title{}
 .body-text{font-size:1rem;color:var(--mid);line-height:1.75;max-width:640px}
 .green-btn{
   display:inline-flex;align-items:center;gap:8px;
@@ -188,11 +195,7 @@ h2.section-title{
   color:rgba(255,255,255,.8);font-size:.75rem;font-weight:600;letter-spacing:.05em;
   padding:6px 14px;border-radius:50px;margin-bottom:20px;text-transform:uppercase;
 }
-.hero-h1{
-  font-size:clamp(2rem,4.2vw,3.2rem);font-weight:900;
-  color:#fff;line-height:1.1;letter-spacing:-.03em;
-  margin-bottom:18px;
-}
+.hero-h1{color:#fff}
 .hero-h1 em{
   font-style:normal;
   background:linear-gradient(135deg,#4FFFB4,#1DB87A);
@@ -224,14 +227,14 @@ h2.section-title{
 /* placeholder avatar for when no image supplied */
 .hero-instructor-img .placeholder-av{
   width:100%;height:100%;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:8px;
+  align-items:center;justify-content:flex-start;gap:8px;
   background:linear-gradient(160deg,#1A4A35 0%,#0A2B1E 100%);
 }
 .placeholder-av .av-circle{
   width:96px;height:96px;border-radius:50%;
   background:rgba(255,255,255,.15);
   border:2px solid rgba(255,255,255,.2);
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:center;justify-content:flex-start;
   font-size:2.2rem;font-weight:900;color:#fff;letter-spacing:-.02em;
 }
 .placeholder-av p{font-size:.8rem;color:rgba(255,255,255,.5);font-style:italic}
@@ -253,7 +256,7 @@ h2.section-title{
 
 /* proof cards below hero */
 .proof-row{
-  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  display:grid;grid-template-columns:1fr;gap:16px;
   margin-top:20px;
 }
 .proof-item{
@@ -284,7 +287,7 @@ h2.section-title{
   border-top:1px solid var(--border);border-bottom:1px solid var(--border);
   padding:44px 6%;
 }
-#marquee h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:24px}
+#marquee h2{}
 .mwrap{overflow:hidden}
 .mtrack{
   display:flex;width:max-content;
@@ -329,7 +332,7 @@ h2.section-title{
   box-shadow:0 12px 36px rgba(0,0,0,.06);
 }
 .rpoint-icon{font-size:1.8rem;margin-bottom:16px}
-.rpoint h3{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:8px;letter-spacing:-.01em}
+.rpoint h3{}
 .rpoint p{font-size:.875rem;color:var(--mid);line-height:1.7}
 .reframe-pullquote{
   margin-top:48px;padding-top:36px;border-top:1px solid var(--border);
@@ -365,12 +368,12 @@ h2.section-title{
 .shirin-img .ph{
   width:100%;height:100%;
   display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:10px;
+  align-items:center;justify-content:flex-start;gap:10px;
 }
 .ph-ring{
   width:120px;height:120px;border-radius:50%;
   background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.2);
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:center;justify-content:flex-start;
   font-size:2.8rem;font-weight:900;color:#fff;
 }
 .ph p{font-size:.8rem;color:rgba(255,255,255,.45);font-style:italic}
@@ -413,7 +416,7 @@ h2.section-title{
 ════════════════════════════════════ */
 #who{background:#fff}
 .who-layout{
-  display:grid;grid-template-columns:1fr 1fr;
+  display:grid;grid-template-columns:1fr;
   gap:0;margin-top:36px;
   border-top:1px solid var(--border);
 }
@@ -431,12 +434,47 @@ h2.section-title{
   font-size:.9rem;color:var(--mid);line-height:1.6;
 }
 .who-list li .icon-dot{
-  width:22px;height:22px;border-radius:50%;flex-shrink:0;margin-top:1px;
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;margin-top:2px;
   display:flex;align-items:center;justify-content:center;
-  font-size:.6rem;font-weight:900;
 }
 .who-list.if-list li .icon-dot{background:rgba(232,98,42,.1);color:var(--orange)}
-.who-list.after-list li .icon-dot{background:var(--green-bg);color:var(--green)}
+.who-list.after-list li .icon-dot{background:var(--green);color:#fff}
+.who-list li .icon-dot svg{width:14px;height:14px}
+
+/* LIGHT MODE GRID CARDS */
+.feature-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; margin-top: 36px;
+}
+.feature-card {
+  background: var(--cream3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 28px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.04);
+}
+.fc-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  border: 1px solid var(--border);
+}
+.fc-icon.red { background: rgba(232,98,42,.1); border-color: rgba(232,98,42,.2); color: var(--orange); }
+.fc-icon.green { background: var(--green-bg); border-color: rgba(26,158,96,.2); color: var(--green); }
+.feature-card h4 {
+  font-size: 1.05rem; font-weight: 800; color: var(--dark); margin-bottom: 8px;
+}
+.feature-card p {
+  font-size: 0.88rem; color: var(--muted); line-height: 1.6;
+}
 
 /* ════════════════════════════════════
    S06 COURSE INTRO - full dark card
@@ -461,7 +499,7 @@ h2.section-title{
 .oc:last-child{border-right:none;padding-right:0;padding-left:32px}
 .oc:nth-child(2){padding:28px 32px 0}
 .oc-emoji{font-size:1.6rem;margin-bottom:12px;display:block}
-.oc h4{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:7px}
+.oc h4{color:#fff}
 .oc p{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.65}
 
 /* ════════════════════════════════════
@@ -496,7 +534,7 @@ h2.section-title{
   background:var(--green2);
 }
 .curr-num{font-size:.72rem;font-weight:700;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
-.curr-item h3{font-size:1.05rem;font-weight:800;color:var(--dark);margin-bottom:7px;letter-spacing:-.01em;transition:color .3s ease}
+.curr-item h3{transition:color .3s ease}
 .curr-item:hover h3{color:var(--green)}
 .curr-item p{font-size:.875rem;color:var(--mid);line-height:1.7}
 
@@ -514,7 +552,7 @@ h2.section-title{
 .format-item:nth-child(2){padding:28px}
 .format-item:nth-child(3){padding:28px}
 .format-emoji{font-size:1.7rem;margin-bottom:12px;display:block}
-.format-item h4{font-size:.9rem;font-weight:700;color:var(--dark);margin-bottom:4px}
+.format-item h4{}
 .format-item p{font-size:.8rem;color:var(--muted)}
 .format-foot{font-size:.875rem;color:var(--muted);margin-top:28px;padding-top:20px;border-top:1px solid var(--border);font-style:italic}
 
@@ -550,7 +588,7 @@ h2.section-title{
 .testi-photo{
   width:100%;aspect-ratio:1;
   background:linear-gradient(145deg,#c8e6da 0%,#a8d5c2 100%);
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:center;justify-content:flex-start;
   font-size:2.5rem;font-weight:800;color:#fff;
   position:relative;overflow:hidden;
 }
@@ -608,10 +646,10 @@ h2.section-title{
 #enroll h2{color:#fff;margin-bottom:32px}
 .enroll-list{
   display:inline-flex;flex-direction:column;
-  gap:12px;text-align:left;margin-bottom:36px;
+  gap:12px;align-items:center;text-align:center;margin-bottom:36px;
 }
 .enroll-row{
-  display:flex;align-items:center;gap:12px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
   font-size:.95rem;color:rgba(255,255,255,.8);
 }
 .echeck{
@@ -650,9 +688,9 @@ h2.section-title{
 /* ════════════════════════════════════
    S13 FAQ - GrowthSchool style
 ════════════════════════════════════ */
-#faq{background:#fff;text-align:center}
+#faq{background:#fff;}
 #faq h2{margin-bottom:32px}
-.faq-list{max-width:900px;margin:0 auto;text-align:left}
+.faq-list{max-width:900px;margin:0 auto;}
 .faq-item{
   border:1px solid var(--border);border-radius:12px;
   margin-bottom:10px;overflow:hidden;
@@ -708,7 +746,7 @@ h2.section-title{
 footer{background:var(--teal-hero);padding:52px 6% 32px}
 .ft-inner{max-width:1100px;margin:0 auto}
 .ft-top{
-  display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  display:grid;grid-template-columns:1fr;gap:48px;
   padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.08);
   margin-bottom:28px;
 }
@@ -790,7 +828,7 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
   .format-item{border-right:none!important;padding-left:0!important;border-bottom:1px solid var(--border)}
   .format-item:last-child{border-bottom:none}
   .hero-card{padding:28px 24px}
-  .hero-h1{font-size:1.75rem}
+  .hero-h1{color:#fff}
   .section{padding:52px 5%}
   .curr-list{padding-left:24px}
   .curr-item::before{left:-31px}
@@ -805,8 +843,7 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
   <a class="nav-logo" href="#">
     <div class="nav-logo-icon">
       <svg viewBox="0 0 24 24" fill="none">
-        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="rgba(255,255,255,0.1)"/>
-        <path d="M8 12L11 15L16 9" stroke="#1DB87A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 12L10.5 16.5L18 7" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
     <div class="nav-brand">Canines Can Care<small>Behavioural Training</small></div>
@@ -848,10 +885,10 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
       <div class="hero-left">
         <div class="hero-eyebrow">🐕 Canines Can Care · Behavioural Course</div>
         <h1 class="hero-h1">
-          Stop Walking on Eggshells Around Your Dog's<br>
-          <em>Guarding Behaviour.</em>
+          When the dog you love growls at you,<br>
+          <em>it’s terrifying.</em>
         </h1>
-        <p class="hero-sub">Learn a clear, humane, step-by-step method to understand and reduce resource guarding - and rebuild trust with your dog.</p>
+        <p class="hero-sub">Learn simple, gentle steps to stop your dog from guarding their food and toys, and rebuild your bond.</p>
         <div class="hero-pills">
           <div class="hero-pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -859,7 +896,7 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
           </div>
           <div class="hero-pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Force-Free Methods
+            No Force, Just Kindness
           </div>
           <div class="hero-pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -900,34 +937,14 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
       </div>
     </div>
 
-    <!-- proof strip -->
-    <div class="proof-row">
-      <div class="proof-item reveal d1">
-        <div class="proof-big"><span class="counter" data-target="1,000">0</span>+</div>
-        <div class="proof-sub">Dog parents trained through Canines Can Care</div>
-        <div class="proof-tags">
-          <span class="proof-tag">KCAI Accredited</span>
-          <span class="proof-tag">Crufts 2015</span>
-          <span class="proof-tag">President's Award 2018</span>
-        </div>
-      </div>
-      <div class="proof-item reveal d2">
-        <div class="proof-big">One of 9</div>
-        <div class="proof-sub">Behaviourally trained KCAI practitioners in the world - the only one in Asia</div>
-        <div class="proof-tags">
-          <span class="proof-tag">30 Years</span>
-          <span class="proof-tag">Force-Free</span>
-          <span class="proof-tag">Internationally Recognised</span>
-        </div>
-      </div>
-    </div>
+
   </div>
 </section>
 
 <!-- ══════ S02 MARQUEE ══════ -->
 <section id="marquee">
   <div class="inner">
-    <h2 class="reveal" style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:24px">Does this sound familiar?</h2>
+    <h2 class="reveal">Does this sound familiar?</h2>
     <div class="mwrap reveal">
       <div class="mtrack">
         <div class="mpill">🍖 My dog growls near his food bowl</div>
@@ -957,23 +974,23 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
     </div>
     <div class="reframe-points">
       <div class="rpoint reveal d1">
-        <div class="rpoint-icon">⚠️</div>
-        <h3>Showing Dominance Backfires</h3>
+        <div class="rpoint-icon">👑</div>
+        <h3>Trying to Show Who's Boss</h3>
         <p>Alpha thinking escalates the very behaviour you're trying to fix. It creates fear - and fear is the root of guarding, not the solution to it.</p>
       </div>
       <div class="rpoint reveal d2">
-        <div class="rpoint-icon">⚠️</div>
-        <h3>Taking Things Forcefully Escalates</h3>
+        <div class="rpoint-icon">✋</div>
+        <h3>Taking Things by Force</h3>
         <p>Grabbing items away teaches your dog that humans are a threat. It confirms exactly what their guarding is based on: that things will be taken.</p>
       </div>
       <div class="rpoint reveal d3">
-        <div class="rpoint-icon">⚠️</div>
-        <h3>Punishing the Growl Is Dangerous</h3>
+        <div class="rpoint-icon">🤐</div>
+        <h3>Punishing the Growl</h3>
         <p>The growl is your dog's warning signal. Suppress it and you remove the only visible sign before a bite. A dog that no longer growls hasn't got better - it's got silenced.</p>
       </div>
     </div>
     <div class="reframe-pullquote reveal">
-      Guarding isn't defiance. It's communication. And once you understand what your dog is actually telling you, everything changes.
+      When your dog growls, they aren't trying to be bad. They are just trying to tell you they are scared. Once you understand that, everything gets easier.
       <div class="reframe-attrib">- Shirin Dhabhar</div>
     </div>
   </div>
@@ -1037,29 +1054,71 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
   <div class="inner">
     <div class="reveal">
       <div class="eyebrow">Who Is This Course For?</div>
-      <h2 class="section-title">Built for dog parents,<br>not professional trainers.</h2>
-      <p class="body-text">Whether your dog growls at meal time or has already snapped - if you want to understand what's happening and what to do, this is for you.</p>
+      <h2 class="section-title">Built for <span style="color:var(--green)">dog parents</span>,<br>and those who love them.</h2>
+      <p class="body-text">Whether your dog growls at dinner or has already snapped, this course will show you exactly what to do.</p>
     </div>
-    <div class="who-layout">
-      <div class="who-col reveal-left">
-        <div class="who-col-head">✅ This course is for you if…</div>
-        <ul class="who-list if-list">
-          <li><div class="icon-dot">●</div> Your dog guards food, toys, spaces or people</li>
-          <li><div class="icon-dot">●</div> You have children in the home and you're worried</li>
-          <li><div class="icon-dot">●</div> You've tried other methods and things have gotten worse</li>
-          <li><div class="icon-dot">●</div> You've been told your dog is dominant and it didn't feel right</li>
-          <li><div class="icon-dot">●</div> You're scared of your own dog in certain situations</li>
-        </ul>
+    <div class="feature-grid">
+      <div class="feature-card reveal d1">
+        <div class="fc-icon red">🦴</div>
+        <h4>Guards Items</h4>
+        <p>Protects food, toys, spaces, or people.</p>
       </div>
-      <div class="who-col reveal-right">
-        <div class="who-col-head">🌿 After this course, your life looks like…</div>
-        <ul class="who-list after-list">
-          <li><div class="icon-dot">●</div> You know exactly what to do the moment guarding starts - instead of freezing</li>
-          <li><div class="icon-dot">●</div> Mealtimes won't feel tense anymore</li>
-          <li><div class="icon-dot">●</div> You'll stop managing around your dog and start actually living with them</li>
-          <li><div class="icon-dot">●</div> You understand what your dog is communicating - and respond, not react</li>
-          <li><div class="icon-dot">●</div> Your home feels calmer. Your relationship feels different.</li>
-        </ul>
+      <div class="feature-card reveal d2">
+        <div class="fc-icon red">👶</div>
+        <h4>Family Safety</h4>
+        <p>You have kids in the home and feel worried.</p>
+      </div>
+      <div class="feature-card reveal d3">
+        <div class="fc-icon red">📉</div>
+        <h4>Worsening Behavior</h4>
+        <p>You've tried other methods but it's getting worse.</p>
+      </div>
+      <div class="feature-card reveal d4">
+        <div class="fc-icon red">👑</div>
+        <h4>Bad Advice</h4>
+        <p>Told your dog is "dominant" but it feels wrong.</p>
+      </div>
+      <div class="feature-card reveal d5">
+        <div class="fc-icon red">😨</div>
+        <h4>Feeling Scared</h4>
+        <p>You're afraid of your own dog in certain situations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ S05b HOW YOUR DOG'S LIFE WILL CHANGE ══════ -->
+<section id="dog-life-change" class="section" style="background:#f4f9f6">
+  <div class="inner">
+    <div class="reveal">
+      <div class="eyebrow">The Transformation</div>
+      <h2 class="section-title">How your dog's life will change</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card reveal d1" style="background:#fff">
+        <div class="fc-icon green">🕊️</div>
+        <h4>No More Guarding</h4>
+        <p>Stops feeling the constant need to guard things.</p>
+      </div>
+      <div class="feature-card reveal d2" style="background:#fff">
+        <div class="fc-icon green">🤲</div>
+        <h4>Safe Hands</h4>
+        <p>Learns that human hands give, rather than take away.</p>
+      </div>
+      <div class="feature-card reveal d3" style="background:#fff">
+        <div class="fc-icon green">😌</div>
+        <h4>Calm Mealtimes</h4>
+        <p>Mealtime anxiety completely disappears.</p>
+      </div>
+      <div class="feature-card reveal d4" style="background:#fff">
+        <div class="fc-icon green">🏡</div>
+        <h4>True Relaxation</h4>
+        <p>Relaxes completely in their own home.</p>
+      </div>
+      <div class="feature-card reveal d5" style="background:#fff">
+        <div class="fc-icon green">❤️</div>
+        <h4>Deep Bond</h4>
+        <p>Rebuilds genuine trust and a deep bond with you.</p>
       </div>
     </div>
   </div>
@@ -1070,7 +1129,7 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
   <div class="inner" style="max-width:1100px;margin:0 auto;padding:0 0 44px">
     <div class="intro-dark reveal-scale">
       <div class="eyebrow">The Course</div>
-      <h2 class="section-title" style="color:#fff;font-size:clamp(1.7rem,3.5vw,2.4rem)">Introducing: Resource Guarding in Dogs</h2>
+      <h2 class="section-title" style="color:#fff">Introducing: Resource Guarding in Dogs</h2>
       <p class="sub-text">A short, practical video course built for dog parents - not trainers.</p>
       <div class="outcomes-open">
         <div class="oc reveal d1">
@@ -1080,7 +1139,7 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
         </div>
         <div class="oc reveal d2">
           <span class="oc-emoji">🏠</span>
-          <h4>Safe home, now</h4>
+          <h4>Make Your Home Safe Today</h4>
           <p>A management plan you can implement from day one - before any training even begins.</p>
         </div>
         <div class="oc reveal d3">
@@ -1104,22 +1163,22 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
     <div class="curr-list">
       <div class="curr-item reveal d1">
         <div class="curr-num">Module 01</div>
-        <h3>Understand What Resource Guarding Actually Is</h3>
+        <h3>Why Dogs Guard Food and Toys</h3>
         <p>Why your dog guards - and why it's not dominance or defiance. The science behind the behaviour, explained simply.</p>
       </div>
       <div class="curr-item reveal d2">
         <div class="curr-num">Module 02</div>
-        <h3>The Mistakes to Stop Immediately</h3>
+        <h3>Mistakes That Make Guarding Worse</h3>
         <p>Common responses that escalate the behaviour - and what to do instead. This module alone changes everything.</p>
       </div>
       <div class="curr-item reveal d3">
         <div class="curr-num">Module 03</div>
-        <h3>A Management Plan for Right Now</h3>
+        <h3>How to Make Your Home Safe Today</h3>
         <p>Create a safer home environment starting from day one. Practical steps you can implement before the next mealtime.</p>
       </div>
       <div class="curr-item reveal d4">
         <div class="curr-num">Module 04</div>
-        <h3>Trust-Building Exercises</h3>
+        <h3>How to Build Trust With Your Dog</h3>
         <p>Long-term techniques that reduce guarding and strengthen your bond. Sustainable change that actually sticks.</p>
       </div>
     </div>
@@ -1285,7 +1344,7 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
         <div class="faq-answer">Resource guarding that has escalated to biting is absolutely addressable. This course covers behaviour at all levels of intensity, and understanding why it happened is the first step to changing it.</div>
       </div>
       <div class="faq-item reveal d2">
-        <button class="faq-btn">Is resource guarding the same as aggression?<span class="faq-icon">+</span></button>
+        <button class="faq-btn">Is my dog aggressive or just guarding?<span class="faq-icon">+</span></button>
         <div class="faq-answer">Not exactly. Resource guarding is a specific behaviour rooted in insecurity around valued items. It can look like aggression - growling, snapping - but the cause and the solution are different. This course explains the distinction clearly.</div>
       </div>
       <div class="faq-item reveal d3">
@@ -1306,7 +1365,7 @@ footer{background:var(--teal-hero);padding:52px 6% 32px}
 
 <!-- ══════ S14 CLOSING ══════ -->
 <section id="closing" class="section">
-  <div class="inner" style="text-align:center">
+  <div class="inner">
     <div class="closing-copy reveal">
       Your dog isn't guarding because they're dangerous.<br>
       They're guarding because they haven't yet learned they don't need to.<br>
@@ -1378,7 +1437,7 @@ const animateValue = (obj, start, end, duration, formatStr) => {
     if (!startTimestamp) startTimestamp = timestamp;
     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
     const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-    const current = Math.floor(easeProgress * (end - start) + start);
+    const current = Math.round(easeProgress * (end - start) + start);
     let formatted = current;
     if (formatStr === '1K') formatted = current >= 1000 ? '1K' : current;
     else if (formatStr === '1,000') formatted = current.toLocaleString();

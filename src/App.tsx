@@ -196,12 +196,20 @@ export default function App() {
       <section id={sections.instructor} className="py-24 px-4 bg-dark text-brand-bg">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center mb-20">
-            <img 
-              src="/1.jpg" 
-              alt="Shirin Dhabhar - Dog Behaviour Expert" 
-              className="w-48 h-48 rounded-full object-cover border-4 border-primary/20 shadow-2xl shrink-0"
-              referrerPolicy="no-referrer"
-            />
+            <div className="relative w-48 h-48 shrink-0 group">
+              <div className="absolute inset-0 rounded-full bg-primary/20 flex items-center justify-center text-4xl font-bold text-primary transition-opacity group-hover:opacity-100">
+                SD
+              </div>
+              <img 
+                src="input_file_0.png" 
+                alt="Shirin Dhabhar - Dog Behaviour Expert" 
+                className="relative z-10 w-48 h-48 rounded-full object-cover border-4 border-primary shadow-2xl transition-transform hover:scale-105"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.opacity = '0';
+                }}
+              />
+            </div>
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Meet your instructor</h2>
               <p className="text-xl text-brand-bg/80 leading-relaxed max-w-2xl">

@@ -646,10 +646,10 @@ h2.section-title{}
 #enroll h2{color:#fff;margin-bottom:32px}
 .enroll-list{
   display:inline-flex;flex-direction:column;
-  gap:12px;align-items:center;text-align:center;margin-bottom:36px;
+  gap:12px;align-items:flex-start;text-align:left;margin-bottom:36px;
 }
 .enroll-row{
-  display:flex;align-items:center;justify-content:center;gap:12px;
+  display:flex;align-items:center;justify-content:flex-start;gap:12px;
   font-size:.95rem;color:rgba(255,255,255,.8);
 }
 .echeck{
@@ -1436,7 +1436,7 @@ const animateValue = (obj, start, end, duration, formatStr) => {
   const step = (timestamp) => {
     if (!startTimestamp) startTimestamp = timestamp;
     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-    const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    const easeProgress = progress; // Linear for perfect sync
     const current = Math.round(easeProgress * (end - start) + start);
     let formatted = current;
     if (formatStr === '1K') formatted = current >= 1000 ? '1K' : current;
